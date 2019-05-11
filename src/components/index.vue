@@ -36,7 +36,7 @@
 
             <el-main>
                 <el-table :data="tableData">
-                    <el-table-column label="日期" prop="date" width="140">
+                    <el-table-column label="sfd" prop="date" width="140">
                     </el-table-column>
                     <el-table-column label="姓名" prop="name" width="120">
                     </el-table-column>
