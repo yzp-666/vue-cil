@@ -71,9 +71,9 @@
             },
             password(){
                 if (this.password) {
-                    this.$refs.tips1.className="none"
+                    this.$refs.tips2.className="none"
                 } else{
-                    this.$refs.tips1.className="row"
+                    this.$refs.tips2.className="row"
                 }
             },
             input(){
