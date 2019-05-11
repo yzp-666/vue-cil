@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "echarts": "^4.2.1",
     "element-ui": "^2.8.2",
     "mockjs": "^1.0.1-beta3",
     "vue": "^2.6.10",
