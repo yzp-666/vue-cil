@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <router-view/>
-    sdfs
+    <div></div>
+    aaa
   </div>
 </template>
 

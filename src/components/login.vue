@@ -40,7 +40,7 @@
         width: 100vw;
         height: 100vh;
         background: rgba(0,0,0,0.5);
-        border: 1px solid transparent;
+        /*border: 1px solid transparent;*/
     }
     .bg {
         position: absolute;
