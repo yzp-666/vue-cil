@@ -47,13 +47,17 @@
         height: 100%;
         width: 100vw;
         background: url("../assets/bg.jpg") center no-repeat;
-        background-position: center center;
-        background-size: auto 100% ;
-        border: 1px solid transparent;
+        background-position: center top;
+        background-size: cover;
+        /*border: 1px solid transparent;*/
+        background-origin: border-box;
+        /*background-position: center center;*/
+        /*background-size: auto 100% ;*/
+        /*border: 1px solid transparent;*/
 
     }
     .sect {
-        margin-top: 60px;
+        margin-top: 30px;
         position: absolute;
         top: 45%;
         left: 50%;
