@@ -2,7 +2,6 @@
   <div id="app">
     <router-view/>
     <div></div>
-    aaa
   </div>
 </template>
 
