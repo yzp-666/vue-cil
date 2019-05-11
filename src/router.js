@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
-///////////修改第一次
+import index from '@/components/index'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {path: '/', name: 'login', component: login},
-    { path: '*', redirect: '/'}
-  ],
-  mode: 'history'
+    routes: [
+        {path: '/', name: 'login', component: login},
+        {path: '*', redirect: '/'},
+        {path: '/index', name: 'index', component: index}
+    ],
+    mode: 'history'
 })
