@@ -2,13 +2,13 @@
     <el-container class="main">
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
-            <el-menu  class="menu-list">
+            <el-menu class="menu-list">
                 <el-menu-item index="1">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
                 </el-menu-item>
                 <el-submenu index="2">
-                    <template slot="title"><i class="el-icon-date" ></i><span>表格管理</span>
+                    <template slot="title"><i class="el-icon-date"></i><span>表格管理</span>
                     </template>
                     <el-menu-item class="menu-list" index="2-1">基本表格</el-menu-item>
                     <el-menu-item index="2-2">排序表格</el-menu-item>
@@ -22,16 +22,17 @@
         </el-aside>
 
         <el-container>
-            <el-header style="text-align: right; font-size: 12px">
-                <el-dropdown>
-                    <i class="el-icon-setting" style="margin-right: 15px"></i>
+            <el-header class="H-head">
+                <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+                <el-dropdown trigger="click"><span class="el-dropdown-link">王小虎
+                    <i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>查看</el-dropdown-item>
-                        <el-dropdown-item>新增</el-dropdown-item>
-                        <el-dropdown-item>删除</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-user-solid">个人信息</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-s-tools">设置</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-warning">安全退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-                <span>王小虎</span>
+                <span></span>
             </el-header>
 
             <el-main>
@@ -71,6 +72,7 @@
             .logo {
                 text-align: center;
                 height: 60px;
+                border-right: solid 1px #e6e6e6;
 
                 img {
                     margin-top: 10px;
@@ -91,19 +93,22 @@
         i {
             color: #fff;
         }
-
     }
 
-    .el-submenu__title>span {
+    .el-dropdown-menu {
+        top: 35px !important;
+    }
+
+    .el-submenu__title > span {
         color: #fff !important;
     }
 
-    .el-menu-item, .el-submenu{
+    .el-menu-item, .el-submenu {
         color: #fff;
         background-color: #424f63
     }
 
-    .el-menu-item.is-active{
+    .el-menu-item.is-active {
         color: #65cea7 !important;
     }
 
@@ -112,20 +117,36 @@
         background: #353f4f !important;
     }
 
-    .el-menu-item:hover i{
+    .el-menu-item:hover i {
         color: #65cea7 !important;
+    }
+
+    .H-head {
+        text-align: right;
+        font-size: 12px;
+        background-color: white;
+        position: relative;
+
+        .el-input {
+            width: 200px;
+            position: absolute;
+            left: 15px;
+        }
     }
 </style>
 <style>
     .el-submenu__title i {
         color: #fff !important;
     }
-    .el-submenu__title:hover{
+
+    .el-submenu__title:hover {
         background: #353f4f !important;
     }
+
     .el-submenu__title:hover span {
         color: #65cea7 !important;
     }
+
     .el-submenu__title:hover i {
         color: #65cea7 !important;
     }
