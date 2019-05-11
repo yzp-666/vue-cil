@@ -13,7 +13,7 @@
                             <input class="code" name="password" id="password" type="password" placeholder="请输入密码">
                         </div>
                         <div class="btn">
-                            <input type="button" id="submit" class="submit" value="登录" onclick="return check(this.form);">
+                            <router-link to="/index"><input type="button" id="submit" class="submit" value="登录" onclick="return check(this.form);"></router-link>
                             <input type="reset" id="reset"  class="reset" value="重置" >
                         </div>
                         <div id="CheckMsg" class="msg"></div>
