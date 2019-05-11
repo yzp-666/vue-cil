@@ -1,82 +1,52 @@
 <template>
-    <div>
-        <el-container style="height: 500px; border: 1px solid #eee">
-            <el-aside style="background-color: rgb(238, 241, 246)" width="200px">
-                <el-menu :default-openeds="['1', '3']">
-                    <el-submenu index="1">
-                        <template slot="title"><i class="el-icon-message"></i>导航一</template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-                        </el-submenu>
-                    </el-submenu>
-                    <el-submenu index="2">
-                        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="2-1">选项1</el-menu-item>
-                            <el-menu-item index="2-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="2-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="2-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-                        </el-submenu>
-                    </el-submenu>
-                    <el-submenu index="3">
-                        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="3-1">选项1</el-menu-item>
-                            <el-menu-item index="3-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="3-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="3-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-                        </el-submenu>
-                    </el-submenu>
-                </el-menu>
-            </el-aside>
+    <el-container class="main">
+        <el-aside class="side" style="background-color: #424f63" width="200px">
+            <div class="logo"><img src="@/assets/logo1.png"></div>
+            <el-menu  class="menu-list">
+                <el-menu-item index="1">
+                    <i class="el-icon-s-home"></i>
+                    <span slot="title">主页</span>
+                </el-menu-item>
+                <el-submenu index="2">
+                    <template slot="title"><i class="el-icon-date" ></i><span>表格管理</span>
+                    </template>
+                    <el-menu-item class="menu-list" index="2-1">基本表格</el-menu-item>
+                    <el-menu-item index="2-2">排序表格</el-menu-item>
+                </el-submenu>
+                <el-submenu index="3">
+                    <template class="sidetitle" slot="title"><i class="el-icon-data-line"></i><span>图表管理</span>
+                    </template>
+                    <el-menu-item index="3-1">柱状图表</el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </el-aside>
 
-            <el-container>
-                <el-header style="text-align: right; font-size: 12px">
-                    <el-dropdown>
-                        <i class="el-icon-setting" style="margin-right: 15px"></i>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>查看</el-dropdown-item>
-                            <el-dropdown-item>新增</el-dropdown-item>
-                            <el-dropdown-item>删除</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    <span>王小虎</span>
-                </el-header>
+        <el-container>
+            <el-header style="text-align: right; font-size: 12px">
+                <el-dropdown>
+                    <i class="el-icon-setting" style="margin-right: 15px"></i>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item>查看</el-dropdown-item>
+                        <el-dropdown-item>新增</el-dropdown-item>
+                        <el-dropdown-item>删除</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
+                <span>王小虎</span>
+            </el-header>
 
-                <el-main>
-                    <el-table :data="tableData">
-                        <el-table-column label="日期" prop="date" width="140">
-                        </el-table-column>
-                        <el-table-column label="姓名" prop="name" width="120">
-                        </el-table-column>
-                        <el-table-column label="地址" prop="address">
-                        </el-table-column>
-                    </el-table>
-                </el-main>
-            </el-container>
+            <el-main>
+                <el-table :data="tableData">
+                    <el-table-column label="日期" prop="date" width="140">
+                    </el-table-column>
+                    <el-table-column label="姓名" prop="name" width="120">
+                    </el-table-column>
+                    <el-table-column label="地址" prop="address">
+                    </el-table-column>
+                </el-table>
+            </el-main>
         </el-container>
-    </div>
+    </el-container>
+
 </template>
 
 <script>
@@ -95,7 +65,20 @@
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+    .main {
+        .side {
+            .logo {
+                text-align: center;
+                height: 60px;
+
+                img {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+
     .el-header {
         background-color: #B3C0D1;
         color: #333;
@@ -104,5 +87,48 @@
 
     .el-aside {
         color: #333;
+
+        i {
+            color: #fff;
+        }
+
     }
+
+    .el-submenu__title>span {
+        color: #fff !important;
+    }
+
+    .el-menu-item, .el-submenu{
+        color: #fff;
+        background-color: #424f63
+    }
+
+    .el-menu-item.is-active{
+        color: #65cea7 !important;
+    }
+
+    .el-menu-item:focus, .el-menu-item:hover {
+        color: #65cea7 !important;
+        background: #353f4f !important;
+    }
+
+    .el-menu-item:hover i{
+        color: #65cea7 !important;
+    }
+</style>
+<style>
+    .el-submenu__title i {
+        color: #fff !important;
+    }
+    .el-submenu__title:hover{
+        background: #353f4f !important;
+    }
+    .el-submenu__title:hover span {
+        color: #65cea7 !important;
+    }
+    .el-submenu__title:hover i {
+        color: #65cea7 !important;
+    }
+
+
 </style>
