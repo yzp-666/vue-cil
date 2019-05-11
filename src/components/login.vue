@@ -28,17 +28,7 @@
 </template>
 
 <script>
-    // if (!this.admin && !this.password) {
-    //     alert("请输入用户名与密码！！！")
-    // } else if (!this.admin){
-    //     alert("请输入用户名！！！");
-    // } else if (!this.password){
-    //     alert("请输入密码！！！");
-    // } else {
-    //     console.log(2);
-    // }
     function go(admin,password,router) {
-
         if (!admin && !password) {
             alert("请输入用户名与密码！！！")
         } else if (!admin){
@@ -53,6 +43,13 @@
             alert("用户名或密码错误");
         }
     }
+    function tips(admin,refs) {
+        if (admin) {
+            refs.className="none"
+        } else{
+            refs.className="row"
+        }
+    }
     export default {
         name: "login",
         data(){
@@ -63,30 +60,24 @@
         },
         watch: {
             admin(){
-                if (this.admin) {
-                    this.$refs.tips1.className="none"
-                } else{
-                    this.$refs.tips1.className="row"
-                }
+                tips(this.admin,this.$refs.tips1)
             },
             password(){
-                if (this.password) {
-                    this.$refs.tips2.className="none"
-                } else{
-                    this.$refs.tips2.className="row"
-                }
+                tips(this.admin,this.$refs.tips2)
             },
-            input(){
-                console.log(this);
-            }
         },
         methods:{
             KeyUpEnter(){
                 go(this.admin,this.password,this.$router)
+                tips(this.admin,this.$refs.tips1)
+                tips(this.admin,this.$refs.tips2)
+
             },
             goin(){
                 // console.log();
                 go(this.admin,this.password,this.$router)
+                tips(this.admin,this.$refs.tips1)
+                tips(this.admin,this.$refs.tips2)
             }
         }
     }

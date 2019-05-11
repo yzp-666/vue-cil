@@ -17,6 +17,23 @@ new Vue({
         return h(App)
     }
 }).$mount('#app')
+var Mock = require('mockjs')
+var data =new Mock.mock("/data.cn", "get", {
+    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
+    'data|8': [{
+        // 属性 id 是一个自增数，起始值为 1，每次增 1
+        'id|+1': 1,
+        'name': '@cname',
+        'sex|1': ['男', '女'],
+        'age|16-48': 0,
+        'time': '@date()',
+        'city': '@city(true)'
+    }]
+})
+// 输出结果
+console.log(Mock);
+console.log(JSON.stringify(data, null, 4))
+
 
 // refresh()
 // window.onresize = function () {
