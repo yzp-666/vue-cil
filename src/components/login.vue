@@ -1,25 +1,25 @@
 <template>
     <div id="go">
         <div class="bg">
-            <div class="sect">
+            <div class="sect" >
                 <div class="login">
                     <img class="login-img" src="../assets/logo.png" alt="">
                     <h1><i>A D M I N E X</i></h1>
-                    <form id="user_login" action="">
+                    <form id="user_login" action="" @keyup.enter="KeyUpEnter">
                         <div>
-                            <input class="name" name="" id="accountName" type="text" placeholder="请输入用户名">
+                            <input class="name" v-model="admin" name="" id="accountName" type="text" placeholder="请输入用户名" ref="admin" value="1">
+                            <div  class="tips"><span ref="tips1" class="none">用户名为空</span></div>
                         </div>
                         <div>
-                            <input class="code" name="password" id="password" type="password" placeholder="请输入密码">
+                            <input class="code" v-model="password" name="password" id="password" type="password" placeholder="请输入密码">
+                            <div class="tips"><span ref="tips2" class="none">密码为空</span></div>
                         </div>
                         <div class="btn">
-                            <router-link to="/index"><input type="button" id="submit" class="submit" value="登录" onclick="return check(this.form);"></router-link>
+                            <input type="button" id="submit" class="submit" value="登录" @click="goin()">
                             <input type="reset" id="reset"  class="reset" value="重置" >
                         </div>
                         <div id="CheckMsg" class="msg"></div>
                     </form>
-
-
 
                 </div>
             </div>
@@ -28,9 +28,66 @@
 </template>
 
 <script>
+    // if (!this.admin && !this.password) {
+    //     alert("请输入用户名与密码！！！")
+    // } else if (!this.admin){
+    //     alert("请输入用户名！！！");
+    // } else if (!this.password){
+    //     alert("请输入密码！！！");
+    // } else {
+    //     console.log(2);
+    // }
+    function go(admin,password,router) {
+
+        if (!admin && !password) {
+            alert("请输入用户名与密码！！！")
+        } else if (!admin){
+            alert("请输入用户名！！！");
+        } else if (!password){
+            alert("输入密码！！！");
+        } else if (admin == 'admin' && password == 'admin') {
+            router.push({
+                name: "index"
+            })
+        } else {
+            alert("用户名或密码错误");
+        }
+    }
     export default {
         name: "login",
-        components:{
+        data(){
+            return {
+                admin: '',
+                password: '',
+            }
+        },
+        watch: {
+            admin(){
+                if (this.admin) {
+                    this.$refs.tips1.className="none"
+                } else{
+                    this.$refs.tips1.className="row"
+                }
+            },
+            password(){
+                if (this.password) {
+                    this.$refs.tips1.className="none"
+                } else{
+                    this.$refs.tips1.className="row"
+                }
+            },
+            input(){
+                console.log(this);
+            }
+        },
+        methods:{
+            KeyUpEnter(){
+                go(this.admin,this.password,this.$router)
+            },
+            goin(){
+                // console.log();
+                go(this.admin,this.password,this.$router)
+            }
         }
     }
 </script>
@@ -45,7 +102,7 @@
     .bg {
         position: absolute;
         height: 100%;
-        width: 100vw;
+        width: 100%;
         background: url("../assets/bg.jpg") center no-repeat;
         background-position: center top;
         background-size: cover;
@@ -81,6 +138,28 @@
     }
     .login>h1>i{
         font-weight: 800;
+    }
+    .tips {
+        width: 250px;
+        height: 16px;
+        margin: -5px auto 0 auto;
+        /*text-align: left;*/
+        /*padding-left: 65px;*/
+        position: relative;
+        top: -8px;
+        color: red;
+        overflow: hidden;
+        /*transition: 500ms;*/
+    }
+    .tips span{
+        display: inline-block;
+        transition: 500ms;
+    }
+    .none {
+        transform: translateY(-20px);
+    }
+    .row {
+        transform: translateY(0px);
     }
 </style>
 <style>
