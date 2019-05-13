@@ -2,8 +2,8 @@
     <el-container class="main">
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
-            <el-menu class="menu-list">
-                <el-menu-item index="1" @click="toHome">
+            <el-menu class="menu-list" default-active="1">
+                <el-menu-item @click="toHome" index="1">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
                 </el-menu-item>
@@ -16,7 +16,7 @@
                 <el-submenu index="3">
                     <template class="sidetitle" slot="title"><i class="el-icon-data-line"></i><span>图表管理</span>
                     </template>
-                    <el-menu-item index="3-1">柱状图表</el-menu-item>
+                    <el-menu-item @click="toChart" index="3-1">柱状图表</el-menu-item>
                 </el-submenu>
             </el-menu>
         </el-aside>
@@ -24,12 +24,14 @@
         <el-container>
             <el-header class="H-head">
                 <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
-                <el-dropdown trigger="click"><span class="el-dropdown-link">王小虎
+                <el-dropdown trigger="click"><span class="el-dropdown-link" style="cursor: pointer">王小虎
                     <i class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item icon="el-icon-user-solid">个人信息</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-s-tools">设置</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-warning"><router-link to="/login">安全退出</router-link></el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-warning">
+                            <router-link to="/login">安全退出</router-link>
+                        </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
                 <span></span>
@@ -37,14 +39,14 @@
 
             <el-main>
                 <router-view></router-view>
-<!--                <el-table :data="tableData">-->
-<!--                    <el-table-column label="sfd" prop="date" width="140">-->
-<!--                    </el-table-column>-->
-<!--                    <el-table-column label="姓名" prop="name" width="120">-->
-<!--                    </el-table-column>-->
-<!--                    <el-table-column label="地址" prop="address">-->
-<!--                    </el-table-column>-->
-<!--                </el-table>-->
+                <!--                <el-table :data="tableData">-->
+                <!--                    <el-table-column label="sfd" prop="date" width="140">-->
+                <!--                    </el-table-column>-->
+                <!--                    <el-table-column label="姓名" prop="name" width="120">-->
+                <!--                    </el-table-column>-->
+                <!--                    <el-table-column label="地址" prop="address">-->
+                <!--                    </el-table-column>-->
+                <!--                </el-table>-->
             </el-main>
         </el-container>
     </el-container>
@@ -65,11 +67,12 @@
                 activeIndex: '1',
             }
         },
-        methods:{
-            toHome(){
-                this.$router.push({
-                    name: 'home'
-                })
+        methods: {
+            toHome() {
+                this.$router.push('/index/home')
+            },
+            toChart() {
+                this.$router.push('/index/chart')
             }
         }
     }
@@ -99,6 +102,7 @@
     .el-aside {
         color: #333;
         height: 100vh;
+
         i {
             color: #fff;
         }

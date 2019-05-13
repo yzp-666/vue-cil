@@ -15,12 +15,16 @@ export default new Router({
                 name: 'home',
                 path: '/index/home',
                 component: home
-            }, {
-                path: '/index', // 默认进入路由
-                redirect: '/index/home' //重定向
-            }]
+            },
+                {
+                    path: '/index/chart', name: 'chart', component: chart
+                },
+                {
+                    path: '/index', // 默认进入路由
+                    redirect: '/index/home' //重定向
+                }]
         },
-        {path: '/chart', name: 'chart', component: chart},
+        ,
         {path: '*', name: 'login', component: login},
     ],
     mode: 'history'
