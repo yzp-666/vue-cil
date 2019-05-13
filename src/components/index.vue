@@ -3,7 +3,7 @@
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
             <el-menu class="menu-list">
-                <el-menu-item index="1">
+                <el-menu-item index="1" @click="toHome">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
                 </el-menu-item>
@@ -29,21 +29,22 @@
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item icon="el-icon-user-solid">个人信息</el-dropdown-item>
                         <el-dropdown-item icon="el-icon-s-tools">设置</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-warning">安全退出</el-dropdown-item>
+                        <el-dropdown-item icon="el-icon-warning"><router-link to="/login">安全退出</router-link></el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
                 <span></span>
             </el-header>
 
             <el-main>
-                <el-table :data="tableData">
-                    <el-table-column label="sfd" prop="date" width="140">
-                    </el-table-column>
-                    <el-table-column label="姓名" prop="name" width="120">
-                    </el-table-column>
-                    <el-table-column label="地址" prop="address">
-                    </el-table-column>
-                </el-table>
+                <router-view></router-view>
+<!--                <el-table :data="tableData">-->
+<!--                    <el-table-column label="sfd" prop="date" width="140">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column label="姓名" prop="name" width="120">-->
+<!--                    </el-table-column>-->
+<!--                    <el-table-column label="地址" prop="address">-->
+<!--                    </el-table-column>-->
+<!--                </el-table>-->
             </el-main>
         </el-container>
     </el-container>
@@ -60,7 +61,15 @@
                 address: '上海市普陀区金沙江路 1518 弄'
             };
             return {
-                tableData: Array(10).fill(item)
+                tableData: Array(10).fill(item),
+                activeIndex: '1',
+            }
+        },
+        methods:{
+            toHome(){
+                this.$router.push({
+                    name: 'home'
+                })
             }
         }
     }
@@ -89,7 +98,7 @@
 
     .el-aside {
         color: #333;
-
+        height: 100vh;
         i {
             color: #fff;
         }

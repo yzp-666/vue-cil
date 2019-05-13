@@ -36,9 +36,7 @@
         } else if (!password){
             alert("输入密码！！！");
         } else if (admin == 'admin' && password == 'admin') {
-            router.push({
-                name: "index"
-            })
+            router.push('/index/home')
         } else {
             alert("用户名或密码错误");
         }
