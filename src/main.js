@@ -55,3 +55,30 @@ new Vue({
 //     document.documentElement.style.fontSize = deviceWidth / 7.5 + "px"
 //   }
 // }
+router.beforeEach((to, from, next) => {
+    /*判断下一个路由是否需要登录，对其进行验证*/
+    if ('auth' in to.meta && to.meta.auth === true) {
+        //判断用户是否登录 hasAuth....
+        if (hasAuth) {
+            /*如果已经登录，可以进入页面*/
+            next()
+        } else {
+            next({
+                name: 'AuthHome', //登录注册页
+                query: {
+                    redirect_url: to.fullPath
+                }
+            })
+        }
+        if (this.$route.query.redirect_url) {
+            this.$router.replace({
+                path: this.$route.query.redirect_url
+            })
+        } else {
+            this.$router.replace({
+                name: 'homeIndex'
+            })
+        }
+    }
+    next()
+})

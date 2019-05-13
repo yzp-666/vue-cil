@@ -7,7 +7,7 @@
                     <h1><i>A D M I N E X</i></h1>
                     <form id="user_login" action="" @keyup.enter="KeyUpEnter">
                         <div>
-                            <input class="name" v-model="admin" name="" id="accountName" type="text" placeholder="请输入用户名" ref="admin" value="1">
+                            <input class="name" v-model="admin" name="" id="accountName" type="text" placeholder="请输入用户名" ref="admin" value="">
                             <div  class="tips"><span ref="tips1" class="none">用户名为空</span></div>
                         </div>
                         <div>
@@ -45,7 +45,7 @@
         } else if (!password){
             alert("输入密码！！！");
             delet()
-        } else if (admin == 'admin' && password == 'admin') {
+        } else if (admin === 'admin' && password === 'admin') {
             add()
             router.push('/index/user')
             // this.reload()
@@ -74,31 +74,23 @@
                 tips(this.admin,this.$refs.tips1)
             },
             password(){
-                tips(this.admin,this.$refs.tips2)
+                tips(this.password,this.$refs.tips2)
             },
         },
         methods:{
             KeyUpEnter(){
                 go(this.admin,this.password,this.$router)
                 tips(this.admin,this.$refs.tips1)
-                tips(this.admin,this.$refs.tips2)
-
+                tips(this.password,this.$refs.tips2)
             },
             goin(){
-                // console.log();
                 go(this.admin,this.password,this.$router)
                 tips(this.admin,this.$refs.tips1)
-                tips(this.admin,this.$refs.tips2)
+                tips(this.password,this.$refs.tips2)
             }
         },
         created(){
-        	console.log(this)
-//      	this.$axios.get("/data/index")
-//      		.then(res=>{
-//      			console.log(res)
-//      		})
 			this.$store.dispatch('getData')
-        	
         }
     }
 </script>
