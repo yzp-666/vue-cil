@@ -1,8 +1,14 @@
 <template>
     <div>
-        <long></long>
-        <post></post>
-        <strip></strip>
+        <div class="long">
+            <long></long>
+        </div>
+        <div class="post">
+            <post></post>
+        </div>
+        <div class="strip">
+            <strip></strip>
+        </div>
     </div>
 </template>
 
@@ -21,6 +27,12 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    .post {
+        display: inline-block;
+    }
+    .strip {
+        display: inline-block;
+    }
 
 </style>

@@ -8,11 +8,6 @@
 <script>
     export default {
         name: "strip",
-        data () {
-            return {
-                msg: 'Welcome to Your Vue.js App'
-            }
-        },
         mounted(){
             this.drawLine();
         },
@@ -22,7 +17,6 @@
                 let myChart = this.$echarts.init(document.getElementById('myCharts'))
                 // 绘制图表
                 myChart.setOption({
-                    title: { text: '在Vue中使用echarts' },
                     tooltip : {
                         trigger: 'axis',
                         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
