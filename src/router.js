@@ -9,31 +9,7 @@ import list from '@/components/list.vue'
 
 Vue.use(Router)
 
-// router.beforeEach((to, from, next) => {
-//     console.log(store.state.token)
-//     // to: Route: 即将要进入的目标 路由对象
-//     // from: Route: 当前导航正要离开的路由
-//     // next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
-//     const route = ['index', 'list'];
-//     let isLogin = store.state.token;  // 是否登录
-//     // 未登录状态；当路由到route指定页时，跳转至login
-//     if (route.indexOf(to.name) >= 0) {
-//         if (isLogin == null) {
-//             router.push({ path: '/login', });
-//         }
-//     }
-//     // 已登录状态；当路由到login时，跳转至home
-//     console.log(to.name)
-//     localStorage.setItem('routerName', to.name)
-//     if (to.name === 'login') {
-//         if (isLogin != null) {
-//             router.push({ path: '/HomeMain', });;
-//         }
-//     }
-//     next();
-// });
 var go
-console.log(this)
 if (window.localStorage.go) {
     //匹配成功  go传进 '/index'
     go = window.localStorage.go
@@ -50,10 +26,16 @@ export default new Router({
                 name: 'user',
                 path: go+'/user',
                 component: () => import ('@/components/user'),
+                meta:{
+                    homePages:true
+                }
                 // component: user
             },
                 {
                     path: go+'/home', name: 'home',component: () => import ('@/components/home'), //component: home
+                    meta:{
+                        homePages:true
+                    }
                 },
                 {
                     path: go+'/chart', name: 'chart', component: chart
