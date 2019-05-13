@@ -47,6 +47,7 @@
             delet()
         } else if (admin == 'admin' && password == 'admin') {
             add()
+            router.go(0)
             router.push('/index/user')
             // this.reload()
         } else {

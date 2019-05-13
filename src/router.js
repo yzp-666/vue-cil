@@ -13,8 +13,10 @@ var go
 if (window.localStorage.go) {
     //匹配成功  go传进 '/index'
     go = window.localStorage.go
+    console.log(8);
 } else {
     go = 'asd'
+    console.log(9);
 }
 export default new Router({
     routes: [
