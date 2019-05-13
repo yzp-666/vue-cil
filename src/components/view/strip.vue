@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div id="myCharts" :style="{width: '600px', height: '400px'}">
+        <p>柱状图表</p>
+        <div id="myCharts" class="myCharts" :style="{width: '600px', height: '400px'}">
         </div>
     </div>
 </template>
@@ -13,9 +14,7 @@
         },
         methods: {
             drawLine(){
-                // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myCharts'))
-                // 绘制图表
                 myChart.setOption({
                     tooltip : {
                         trigger: 'axis',
@@ -114,6 +113,15 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    .myCharts{
+        padding: 15px;
+    }
+    p {
+        padding-left: 20px;
+        border-bottom: 1px dashed #7e8c8d;
+        height: 30px;
+        line-height: 30px;
+        font-weight: 800;
+    }
 </style>

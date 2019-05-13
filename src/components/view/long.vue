@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>柱状图表</p>
         <div id="myChart" :style="{width: '1250px', height: '500px'}">
         </div>
     </div>
@@ -13,14 +14,12 @@
         },
         methods: {
             drawLine(){
-                // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myChart'))
-                // 绘制图表
                 myChart.setOption({
                     tooltip : {
                         trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        axisPointer : {
+                            type : 'shadow'
                         }
                     },
                     legend: {
@@ -86,6 +85,15 @@
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+    #myChart{
+        padding: 15px;
+    }
+    p {
+        padding-left: 20px;
+        border-bottom: 1px dashed #7e8c8d;
+        height: 30px;
+        line-height: 30px;
+        font-weight: 800;
+    }
 </style>

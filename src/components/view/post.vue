@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>柱状图表</p>
         <div id="myChar" :style="{width: '600px', height: '400px'}">
         </div>
     </div>
@@ -8,11 +9,6 @@
 <script>
     export default {
         name: "post",
-        data () {
-            return {
-                msg: 'Welcome to Your Vue.js App'
-            }
-        },
         mounted(){
             this.drawLine();
         },
@@ -26,9 +22,7 @@
                 for (var i = 0; i < data.length; i++) {
                     dataShadow.push(yMax);
                 }
-                // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById('myChar'))
-                // 绘制图表
                 myChart.setOption({
                     title: {
                         text: '特性示例：渐变色 阴影 点击缩放',
@@ -121,6 +115,16 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 
+    #myChar{
+        padding: 15px;
+    }
+    p {
+        padding-left: 20px;
+        border-bottom: 1px dashed #7e8c8d;
+        height: 30px;
+        line-height: 30px;
+        font-weight: 800;
+    }
 </style>

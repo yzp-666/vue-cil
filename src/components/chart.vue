@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="vbg">
         <div class="long">
-            <long></long>
+            <long ></long>
         </div>
         <div class="post">
             <post></post>
@@ -28,11 +28,23 @@
 </script>
 
 <style scoped lang="less">
+    .vbg {
+        background: red;
+    }
+    .long,.post,.strip{
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background: white;
+    }
+    .long {
+        margin-bottom: 25px;
+    }
     .post {
         display: inline-block;
     }
     .strip {
         display: inline-block;
+        margin-left: 20px;
     }
 
 </style>
