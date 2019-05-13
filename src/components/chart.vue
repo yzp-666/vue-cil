@@ -41,7 +41,7 @@
     }
     .strip {
         display: inline-block;
-        margin-left: 36px;
+        margin-left: 32px;
     }
 
 </style>

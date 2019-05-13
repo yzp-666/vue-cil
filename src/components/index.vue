@@ -2,7 +2,7 @@
     <el-container class="main">
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
-            <el-menu class="menu-list" default-active="1">
+            <el-menu @select="guanbi" class="menu-list" :default-active="index">
                 <el-menu-item @click="toUser" index="1">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
@@ -10,7 +10,7 @@
                 <el-submenu index="2">
                     <template slot="title"><i class="el-icon-date"></i><span>表格管理</span>
                     </template>
-                    <el-menu-item class="menu-list" index="2-1" @click="toList">基本表格</el-menu-item>
+                    <el-menu-item @click="toList" class="menu-list" index="2-1">基本表格</el-menu-item>
                     <el-menu-item index="2-2">排序表格</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
@@ -24,8 +24,11 @@
         <el-container>
             <el-header class="H-head">
                 <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
-                <el-dropdown trigger="click">
-                    <span class="el-dropdown-link" style="cursor: pointer">王小虎<i
+                <el-dropdown style="cursor: pointer" trigger="click">
+                    <span class="el-dropdown-link"> <img
+                            height="30px"
+                            src="https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+                            style="vertical-align: middle;padding-right: 10px" width="30px">王小虎<i
                             class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
                         <div @click="toUser">
@@ -39,11 +42,12 @@
                             </el-dropdown-item>
                         </div>
                         <div>
-                            <router-link to="/login">
+                            <el-button @click="open" style="padding: 0" type="text">
                                 <el-dropdown-item icon="el-icon-warning">
                                     安全退出
                                 </el-dropdown-item>
-                            </router-link>
+                            </el-button>
+
                         </div>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -54,7 +58,7 @@
                 <router-view></router-view>
             </el-main>
         </el-container>
-        <footer>Copyright © 2019 zzmhot All Rights Reserved</footer>
+
     </el-container>
 
 </template>
@@ -64,10 +68,17 @@
         name: "index",
         data() {
             return {
-                activeIndex: '1',
+                index: '1'
             }
         },
+        created(){
+            this.index=window.localStorage.index
+        },
         methods: {
+            guanbi(index) {
+                window.localStorage.setItem('index', index)
+                console.log( )
+            },
             toHome() {
                 this.$router.push('/index/home')
             },
@@ -77,8 +88,25 @@
             toChart() {
                 this.$router.push('/index/chart')
             },
-            toList(){
+            toList() {
                 this.$router.push('/index/list')
+            },
+            open() {
+                this.$confirm('此操作将注销账户, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'danger'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '注销成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消注销'
+                    });
+                });
             }
         }
     }
@@ -96,18 +124,6 @@
                 }
             }
         }
-    }
-    footer{
-        position: fixed;
-        bottom: 0;
-        background: white;
-        margin-left: 200px;
-        width: fill-available;
-        text-align: center;
-        height: 50px;
-        color: #7A7676;
-        font-size: 14px;
-        line-height: 50px;
     }
 
     .el-header {
@@ -140,8 +156,8 @@
     }
 
     .el-main {
-        padding-left: 200px;
-        padding-top: 60px;
+        padding-left: 205px;
+        padding-top: 65px;
         margin-top: 10px;
         margin-left: 10px;
     }

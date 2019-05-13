@@ -90,10 +90,10 @@
         padding: 15px;
     }
     p {
-        padding-left: 20px;
+        padding: 10px 0 10px 20px;
         border-bottom: 1px dashed #7e8c8d;
         height: 30px;
         line-height: 30px;
-        font-weight: 800;
+        font-weight: 600;
     }
 </style>

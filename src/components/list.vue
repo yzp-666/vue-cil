@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%;border-radius: 10px">
+		<el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%;border-radius: 10px;text-align: center">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column label="id" width="80">
@@ -34,12 +34,12 @@
 					<span style="">{{ scope.row.date }}</span>
 				</template>
 			</el-table-column>
-			<el-table-column label="邮箱" width="120">
+			<el-table-column label="邮箱" width="180">
 				<template slot-scope="scope">
 					<span style="">{{ scope.row.email }}</span>
 				</template>
 			</el-table-column>
-			<el-table-column label="地址" width="200">
+			<el-table-column label="地址" width="220">
 				<template slot-scope="scope">
 					<span style="">{{ scope.row.site }}</span>
 				</template>
@@ -250,9 +250,6 @@
 </script>
 
 <style lang="less" scoped>
-	* {
-		text-align: center;
-	}
 
 	.ul-list {
 		display: flex;
