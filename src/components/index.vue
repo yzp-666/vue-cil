@@ -84,7 +84,6 @@
             .logo {
                 text-align: center;
                 height: 60px;
-                border-right: solid 1px #e6e6e6;
 
                 img {
                     margin-top: 10px;
@@ -94,18 +93,40 @@
     }
 
     .el-header {
-        background-color: #B3C0D1;
         color: #333;
         line-height: 60px;
+        margin-left: 200px;
+        position: fixed;
+        top: 0;
+        text-align: right;
+        font-size: 12px;
+        background-color: white;
+        z-index: 200;
+        width: -webkit-fill-available;
+
+        .el-input {
+            width: 200px;
+            position: absolute;
+            left: 15px;
+        }
     }
 
     .el-aside {
         color: #333;
         height: 100vh;
+        position: fixed;
 
         i {
             color: #fff;
         }
+    }
+
+    .el-main {
+        padding-left: 200px;
+        padding-top: 60px;
+        background: #e6e6e6;
+        margin-top: 10px;
+        margin-left: 10px;
     }
 
     .el-dropdown-menu {
@@ -123,6 +144,7 @@
 
     .el-menu-item.is-active {
         color: #65cea7 !important;
+        background: #353f4f !important;
     }
 
     .el-menu-item:focus, .el-menu-item:hover {
@@ -134,17 +156,8 @@
         color: #65cea7 !important;
     }
 
-    .H-head {
-        text-align: right;
-        font-size: 12px;
-        background-color: white;
-        position: relative;
-
-        .el-input {
-            width: 200px;
-            position: absolute;
-            left: 15px;
-        }
+    .el-menu{
+        border: none;
     }
 </style>
 <style>

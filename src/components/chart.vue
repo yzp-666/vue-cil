@@ -28,9 +28,6 @@
 </script>
 
 <style scoped lang="less">
-    .vbg {
-        background: red;
-    }
     .long,.post,.strip{
         border: 1px solid transparent;
         border-radius: 10px;
@@ -44,7 +41,7 @@
     }
     .strip {
         display: inline-block;
-        margin-left: 20px;
+        margin-left: 36px;
     }
 
 </style>

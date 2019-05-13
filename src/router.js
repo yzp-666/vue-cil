@@ -4,6 +4,7 @@ import login from '@/components/login'
 import index from '@/components/index'
 import chart from '@/components/chart.vue'
 import home from '@/components/home.vue'
+import user from '@/components/user.vue'
 
 Vue.use(Router)
 
@@ -13,9 +14,12 @@ export default new Router({
         {
             path: '/index', name: 'index', component: index, children: [{
                 name: 'home',
-                path: '/index/home',
-                component: home
+                path: '/index/user',
+                component: user
             },
+                {
+                    path: '/index/home', name: 'home', component: home
+                },
                 {
                     path: '/index/chart', name: 'chart', component: chart
                 },
