@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="myChar" :style="{width: '600px', height: '600px'}">
+        <div id="myChar" :style="{width: '400px', height: '400px'}">
         </div>
     </div>
 </template>
