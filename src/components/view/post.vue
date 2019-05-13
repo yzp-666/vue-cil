@@ -25,8 +25,7 @@
                 let myChart = this.$echarts.init(document.getElementById('myChar'))
                 myChart.setOption({
                     title: {
-                        text: '特性示例：渐变色 阴影 点击缩放',
-                        subtext: 'Feature Sample: Gradient Color, Shadow, Click Zoom'
+                        subtext: '点击选择，滚动缩放'
                     },
                     xAxis: {
                         data: dataAxis,
