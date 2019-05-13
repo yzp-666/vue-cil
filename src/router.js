@@ -5,6 +5,7 @@ import index from '@/components/index'
 import chart from '@/components/chart.vue'
 import home from '@/components/home.vue'
 import user from '@/components/user.vue'
+import list from '@/components/list.vue'
 
 Vue.use(Router)
 
@@ -13,7 +14,7 @@ export default new Router({
         {path: '/', name: 'login', component: login},
         {
             path: '/index', name: 'index', component: index, children: [{
-                name: 'home',
+                name: 'user',
                 path: '/index/user',
                 component: user
             },
@@ -24,8 +25,11 @@ export default new Router({
                     path: '/index/chart', name: 'chart', component: chart
                 },
                 {
+                    path: '/index/list', name: 'list', component: list
+                },
+                {
                     path: '/index', // 默认进入路由
-                    redirect: '/index/home' //重定向
+                    redirect: '/index/user' //重定向
                 }]
         },
         ,

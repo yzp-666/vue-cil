@@ -3,14 +3,14 @@
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
             <el-menu class="menu-list" default-active="1">
-                <el-menu-item @click="toHome" index="1">
+                <el-menu-item @click="toUser" index="1">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
                 </el-menu-item>
                 <el-submenu index="2">
                     <template slot="title"><i class="el-icon-date"></i><span>表格管理</span>
                     </template>
-                    <el-menu-item class="menu-list" index="2-1">基本表格</el-menu-item>
+                    <el-menu-item class="menu-list" index="2-1" @click="toList">基本表格</el-menu-item>
                     <el-menu-item index="2-2">排序表格</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
@@ -20,18 +20,31 @@
                 </el-submenu>
             </el-menu>
         </el-aside>
-
+        <div style="position: fixed;background: #eff0f4;width: 100%;height: 100%;z-index: -1"></div>
         <el-container>
             <el-header class="H-head">
                 <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
-                <el-dropdown trigger="click"><span class="el-dropdown-link" style="cursor: pointer">王小虎
-                    <i class="el-icon-arrow-down el-icon--right"></i></span>
+                <el-dropdown trigger="click">
+                    <span class="el-dropdown-link" style="cursor: pointer">王小虎<i
+                            class="el-icon-arrow-down el-icon--right"></i></span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item icon="el-icon-user-solid">个人信息</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-s-tools">设置</el-dropdown-item>
-                        <el-dropdown-item icon="el-icon-warning">
-                            <router-link to="/login">安全退出</router-link>
-                        </el-dropdown-item>
+                        <div @click="toUser">
+                            <el-dropdown-item icon="el-icon-user-solid">
+                                <router-link to="/index/user">个人信息</router-link>
+                            </el-dropdown-item>
+                        </div>
+                        <div @click="toHome">
+                            <el-dropdown-item icon="el-icon-s-tools">
+                                设置
+                            </el-dropdown-item>
+                        </div>
+                        <div>
+                            <router-link to="/login">
+                                <el-dropdown-item icon="el-icon-warning">
+                                    安全退出
+                                </el-dropdown-item>
+                            </router-link>
+                        </div>
                     </el-dropdown-menu>
                 </el-dropdown>
                 <span></span>
@@ -39,16 +52,9 @@
 
             <el-main>
                 <router-view></router-view>
-                <!--                <el-table :data="tableData">-->
-                <!--                    <el-table-column label="sfd" prop="date" width="140">-->
-                <!--                    </el-table-column>-->
-                <!--                    <el-table-column label="姓名" prop="name" width="120">-->
-                <!--                    </el-table-column>-->
-                <!--                    <el-table-column label="地址" prop="address">-->
-                <!--                    </el-table-column>-->
-                <!--                </el-table>-->
             </el-main>
         </el-container>
+        <footer>Copyright © 2019 zzmhot All Rights Reserved</footer>
     </el-container>
 
 </template>
@@ -57,13 +63,7 @@
     export default {
         name: "index",
         data() {
-            const item = {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            };
             return {
-                tableData: Array(10).fill(item),
                 activeIndex: '1',
             }
         },
@@ -71,8 +71,14 @@
             toHome() {
                 this.$router.push('/index/home')
             },
+            toUser() {
+                this.$router.push('/index/user')
+            },
             toChart() {
                 this.$router.push('/index/chart')
+            },
+            toList(){
+                this.$router.push('/index/list')
             }
         }
     }
@@ -91,6 +97,18 @@
             }
         }
     }
+    footer{
+        position: fixed;
+        bottom: 0;
+        background: white;
+        margin-left: 200px;
+        width: fill-available;
+        text-align: center;
+        height: 50px;
+        color: #7A7676;
+        font-size: 14px;
+        line-height: 50px;
+    }
 
     .el-header {
         color: #333;
@@ -102,7 +120,7 @@
         font-size: 12px;
         background-color: white;
         z-index: 200;
-        width: -webkit-fill-available;
+        width: fill-available;
 
         .el-input {
             width: 200px;
@@ -124,7 +142,6 @@
     .el-main {
         padding-left: 200px;
         padding-top: 60px;
-        background: #e6e6e6;
         margin-top: 10px;
         margin-left: 10px;
     }
@@ -156,7 +173,7 @@
         color: #65cea7 !important;
     }
 
-    .el-menu{
+    .el-menu {
         border: none;
     }
 </style>
