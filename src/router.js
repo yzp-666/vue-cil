@@ -9,31 +9,38 @@ import list from '@/components/list.vue'
 
 Vue.use(Router)
 
+var go
+if (window.localStorage.go) {
+    //匹配成功  go传进 '/index'
+    go = window.localStorage.go
+} else {
+    go = 'asd'
+}
 export default new Router({
     routes: [
-        {path: '/', name: 'login', component: login},
+        {path: '/', name: 'login', component: login },
         {
-            path: '/index', name: 'index', component: index, children: [{
+            path: go, name: 'index', component: index, children: [{
                 name: 'user',
-                path: '/index/user',
+                path: go+'/user',
                 component: user
             },
                 {
-                    path: '/index/home', name: 'home', component: home
+                    path: go+'/home', name: 'home', component: home
                 },
                 {
-                    path: '/index/chart', name: 'chart', component: chart
+                    path: go+'/chart', name: 'chart', component: chart
                 },
                 {
-                    path: '/index/list', name: 'list', component: list
+                    path: go+'/list', name: 'list', component: list
                 },
                 {
-                    path: '/index', // 默认进入路由
-                    redirect: '/index/user' //重定向
+                    path: go, // 默认进入路由
+                    redirect: go+'/user' //重定向
                 }]
         },
-        ,
-        {path: '*', name: 'login', component: login},
+
+        {path: '*',redirect: '/' },
     ],
     mode: 'history'
 })

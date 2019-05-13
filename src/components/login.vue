@@ -28,17 +28,30 @@
 </template>
 
 <script>
+
+    function add() {
+        window.localStorage.setItem('go','/index')
+    }
+    function delet() {
+        window.localStorage.clear()
+    }
     function go(admin,password,router) {
         if (!admin && !password) {
             alert("请输入用户名与密码！！！")
+            delet()
         } else if (!admin){
             alert("请输入用户名！！！");
+            delet()
         } else if (!password){
             alert("输入密码！！！");
+            delet()
         } else if (admin == 'admin' && password == 'admin') {
+            add()
             router.push('/index/user')
+            // this.reload()
         } else {
             alert("用户名或密码错误");
+            delet()
         }
     }
     function tips(admin,refs) {
