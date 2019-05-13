@@ -1,50 +1,53 @@
 <template>
-	<div>
-		<el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" style="width: 100%;border-radius: 10px;text-align: center">
+	<div style="position: relative;">
+		<div class="head">
+			<span>基本表格</span>
+			<input type="button" value="增加数据" @click="push=true"/>
+		</div>
+		<!-- 增加框 -->
+		<el-dialog title="编辑修改" :visible.sync="push" width="25%">
+			<el-form :model="nobj">
+				<el-form-item label="姓名">
+					<el-input v-model="nobj.name" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="性别">
+					<el-input v-model="nobj.sex" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="年龄">
+					<el-input v-model="nobj.old" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="生日">
+					<el-input v-model="nobj.date" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="邮箱">
+					<el-input v-model="nobj.email" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="地址">
+					<el-input v-model="nobj.site" autocomplete="off"></el-input>
+				</el-form-item>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click="push = false">取 消</el-button>
+				<el-button type="primary" @click="nqd">确 定</el-button>
+			</div>
+		</el-dialog>
+		<el-table :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" border style="width: 100%"
+		 @selection-change="select">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
-			<el-table-column label="id" width="80">
-				<template slot-scope="scope">
-					<span style="">{{ scope.row.id }}</span>
-				</template>
+			<el-table-column fixed prop="name" label="姓名" width="120">
 			</el-table-column>
-			<el-table-column label="姓名" width="80">
-				<template slot-scope="scope">
-					<div slot="reference" class="name-wrapper">
-						<span style="">{{ scope.row.name }}</span>
-					</div>
-				</template>
+			<el-table-column prop="sex" label="性别" width="60">
 			</el-table-column>
-			<el-table-column label="性别" width="80">
-				<template slot-scope="scope">
-					<div slot="reference" class="name-wrapper">
-						<span style="">{{ scope.row.sex }}</span>
-					</div>
-				</template>
+			<el-table-column prop="old" label="年龄" width="80">
 			</el-table-column>
-			<el-table-column label="年龄" width="80">
-				<template slot-scope="scope">
-					<div slot="reference" class="name-wrapper">
-						<span style="">{{ scope.row.old }}</span>
-					</div>
-				</template>
+			<el-table-column prop="date" label="生日" width="120">
 			</el-table-column>
-			<el-table-column label="生日" width="120">
-				<template slot-scope="scope">
-					<span style="">{{ scope.row.date }}</span>
-				</template>
+			<el-table-column prop="email" label="邮箱" width="160">
 			</el-table-column>
-			<el-table-column label="邮箱" width="180">
-				<template slot-scope="scope">
-					<span style="">{{ scope.row.email }}</span>
-				</template>
+			<el-table-column prop="site" label="地址" width="380">
 			</el-table-column>
-			<el-table-column label="地址" width="220">
-				<template slot-scope="scope">
-					<span style="">{{ scope.row.site }}</span>
-				</template>
-			</el-table-column>
-			<el-table-column label="操作">
+			<el-table-column fixed="right" label="操作" width="280">
 				<template slot-scope="scope">
 					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button size="mini" type="danger" @click="open(scope.$index)">删除</el-button>
@@ -55,9 +58,15 @@
 			<el-pagination small layout="total,prev, pager, next" :total="total" @current-change="current_change">
 			</el-pagination>
 		</div>
+		<el-button type="danger" @click="toggleSelection" class='del'>
+			批量删除
+		</el-button>
 		<!-- 修改框 -->
 		<el-dialog title="编辑修改" :visible.sync="dialogFormVisible" width="25%">
 			<el-form :model="obj">
+				<el-form-item label="id">
+					<el-input v-model="obj.id" autocomplete="off"></el-input>
+				</el-form-item>
 				<el-form-item label="姓名">
 					<el-input v-model="obj.name" autocomplete="off"></el-input>
 				</el-form-item>
@@ -86,6 +95,7 @@
 </template>
 
 <script>
+	var a = true
 	export default {
 		name: 'list',
 		data() {
@@ -99,115 +109,18 @@
 						email: '819836692@qq.com',
 						site: '上海市普陀区金沙江路 1518 弄'
 					},
-					{
-						id: '2',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '3',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '4',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '5',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '6',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '7',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '8',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '9',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '10',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '11',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-					{
-						id: '12',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
 				],
 				arr: [],
+				idarr: [],
 				total: 0, //默认数据总数
 				pagesize: 10, //每页的数据条数
 				currentPage: 1, //默认开始页面
 				// show: false,
 				obj: {},
+				nobj: {id:'',name:'',sex:'',old:'',email:'',date:'',site:''},
 				index: '',
 				dialogFormVisible: false,
-				dialogVisible: false,
+				push: false,
 			}
 		},
 		methods: {
@@ -228,9 +141,15 @@
 					type: 'warning'
 				}).then(() => {
 					this.tableData.splice(this.index, 1)
-					this.$message({type: 'success',message: '删除成功!'});
+					this.$message({
+						type: 'success',
+						message: '删除成功!'
+					});
 				}).catch(() => {
-					this.$message({type: 'info',message: '已取消删除'});
+					this.$message({
+						type: 'info',
+						message: '已取消删除'
+					});
 				});
 			},
 			// 列表栏方法
@@ -242,6 +161,42 @@
 				this.tableData[this.index] = this.obj
 				this.dialogFormVisible = false
 			},
+			//复选框选中事件
+			select(val) {
+				this.arr = val
+			},
+			//批量删除事件
+			toggleSelection() {
+				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					let vthis = this
+					this.arr.map(function(item) {
+						vthis.tableData.map((items, indexs) => {
+							if (item.id == items.id) {
+								vthis.tableData.splice(indexs, 1)
+							}
+						})
+					})
+					this.$message({
+						type: 'success',
+						message: '删除成功!'
+					});
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '已取消删除'
+					});
+				});
+			},
+			//增加事件
+			nqd( ){
+				this.push=false
+				this.nobj.id = this.tableData.length+1
+				this.tableData.push(JSON.parse(JSON.stringify(this.nobj)))
+			}
 		},
 		created() {
 			this.total = this.tableData.length
@@ -249,7 +204,16 @@
 	}
 </script>
 
+<style>
+	.el-table td, .el-table th{
+		padding: 10px 0 !important;
+	}
+</style>
+
 <style lang="less" scoped>
+	* {
+		text-align: center;
+	}
 
 	.ul-list {
 		display: flex;
@@ -271,5 +235,36 @@
 
 	.el-input {
 		width: 80% !important;
+	}
+
+	.del {
+		font-size: 14px;
+		padding: 8px !important;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+
+	.head {
+		display: flex;
+		justify-content:space-between;
+		padding: 8px 24px;
+		background: white;
+		border-radius: 3px 3px 0 0;
+		
+		span{
+			font-weight: bold;
+			color: rgba(105, 105, 105, 1);
+		}
+		
+		input {
+			padding: 4px 16px;
+			border-radius: 3px;
+			color: white;
+			background: rgb(30, 144, 255);
+			&:hover{
+				background: rgba(30, 144, 255, 0.8);
+			}
+		}
 	}
 </style>

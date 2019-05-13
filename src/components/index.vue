@@ -2,7 +2,7 @@
     <el-container class="main">
         <el-aside class="side" style="background-color: #424f63" width="200px">
             <div class="logo"><img src="@/assets/logo1.png"></div>
-            <el-menu @select="guanbi" class="menu-list" :default-active="index">
+            <el-menu :default-active="index" @select="guanbi" class="menu-list">
                 <el-menu-item @click="toUser" index="1">
                     <i class="el-icon-s-home"></i>
                     <span slot="title">主页</span>
@@ -23,7 +23,7 @@
         <div style="position: fixed;background: #eff0f4;width: 100%;height: 100%;z-index: -1"></div>
         <el-container>
             <el-header class="H-head">
-                <el-input placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+                <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input"></el-input>
                 <el-dropdown style="cursor: pointer" trigger="click">
                     <span class="el-dropdown-link"> <img
                             height="30px"
@@ -68,19 +68,24 @@
         name: "index",
         data() {
             return {
-                index: '1'
+                index: '1',
+                input: ''
             }
         },
-        created(){
-            this.index=window.localStorage.index
+        created() {
+            if(!window.localStorage.index){
+                window.localStorage.index=1
+            }
+            this.index = window.localStorage.index
+            console.log(this.index)
         },
         methods: {
             guanbi(index) {
                 window.localStorage.setItem('index', index)
-                console.log( )
+
             },
             toHome() {
-                this.$router.push('/index/home')
+                this.$router.push('/index/][-=/6')
             },
             toUser() {
                 this.$router.push('/index/user')
@@ -95,12 +100,13 @@
                 this.$confirm('此操作将注销账户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
-                    type: 'danger'
+                    type: 'warning'
                 }).then(() => {
                     this.$message({
                         type: 'success',
                         message: '注销成功!'
                     });
+                    this.$router.push('/login')
                 }).catch(() => {
                     this.$message({
                         type: 'info',
