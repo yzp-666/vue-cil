@@ -10,6 +10,7 @@ import list from '@/components/list.vue'
 Vue.use(Router)
 
 var go
+console.log(this)
 if (window.localStorage.go) {
     //匹配成功  go传进 '/index'
     go = window.localStorage.go
