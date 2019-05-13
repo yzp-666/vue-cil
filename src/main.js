@@ -6,10 +6,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/CSS/reset.css'
 import echarts from 'echarts'
+import axios from 'axios'
+//import Mock from 'mock'
 
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+require('@/mock.js')
+Vue.prototype.$axios=axios
 
 new Vue({
     router,
@@ -18,7 +22,7 @@ new Vue({
         return h(App)
     }
 }).$mount('#app')
-var Mock = require('mockjs')
+//var Mock = require('mockjs')
 // var data =new Mock.mock("/data.cn", "get", {
 //     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
 //     'data|8': [{

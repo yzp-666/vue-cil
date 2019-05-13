@@ -90,6 +90,15 @@
                 tips(this.admin,this.$refs.tips1)
                 tips(this.admin,this.$refs.tips2)
             }
+        },
+        created(){
+        	console.log(this)
+//      	this.$axios.get("/data/index")
+//      		.then(res=>{
+//      			console.log(res)
+//      		})
+			this.$store.dispatch('getData')
+        	
         }
     }
 </script>
