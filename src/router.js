@@ -16,6 +16,7 @@ Vue.use(Router)
 // } else {
 //     go = '/index'
 // }
+
 export default new Router({
     routes: [
         {path: '/', name: 'login', component: login },
