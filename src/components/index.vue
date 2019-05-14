@@ -78,6 +78,10 @@
             }
             this.index = window.localStorage.index
             console.log(this.index)
+            if (!window.localStorage.islogin) {
+                console.log(4);
+                this.$router.replace("/")
+            }
         },
         methods: {
             guanbi(index) {
