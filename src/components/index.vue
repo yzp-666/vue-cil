@@ -73,6 +73,9 @@
             }
         },
         created() {
+            if (!window.localStorage.islogin) {
+                this.$router.replace('/')
+            }
             this.$store.dispatch('getData')
             if (!window.localStorage.index) {
                 window.localStorage.index = 1

@@ -15,8 +15,6 @@ Vue.use(ElementUI);
 require('@/mock.js')
 Vue.prototype.$axios=axios
 
-
-
 new Vue({
     router,
     store,
@@ -42,9 +40,26 @@ new Vue({
 // console.log(JSON.stringify(data, null, 4))
 
 let islogin = localStorage.getItem("islogin"); //获取本地登录状态
+console.log(5);
 if(islogin){
     store.commit("loginSuccess")
 }
+router.beforeEach((to, from, next)=>{
+    let logined = store.state.islogin;
+    if(to.name=="login"){
+        if(!logined){
+            next();
+        }else{
+            router.push('/');
+        }
+    }else{
+        if(!logined){
+            router.push('/');
+        }else{
+            next();
+        }
+    }
+})
 
 
 // router.beforeEach((to, from, next) => {
@@ -74,19 +89,3 @@ if(islogin){
 //     }
 //     next()
 // })
-router.beforeEach((to, from, next)=>{
-    let logined = store.state.islogin;
-    if(to.name=="login"){
-        if(!logined){
-            next();
-        }else{
-            router.push('/');
-        }
-    }else{
-        if(!logined){
-            router.push('/');
-        }else{
-            next();
-        }
-    }
-})
