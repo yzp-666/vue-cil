@@ -57,7 +57,6 @@ new Vue({
 // console.log(JSON.stringify(data, null, 4))
 
 let islogin = localStorage.getItem("islogin"); //获取本地登录状态
-console.log(5);
 if(islogin){
     store.commit("loginSuccess")
 }

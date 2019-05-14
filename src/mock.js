@@ -16,5 +16,5 @@ for(let i = 0; i < 20; i ++) {
   }
   data.push(template)
 }
-console.log(data)
+// console.log(data)
 Mock.mock('/data/index', 'get', data)

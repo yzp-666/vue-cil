@@ -98,7 +98,7 @@
                 });
             },
             KeyUpEnter(){
-                console.log(this.open)
+                // console.log(this.open)
                 go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
@@ -107,12 +107,12 @@
                 go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
-                console.log(this);
+                // console.log(this);
             }
         },
         created(){
 			this.$store.dispatch('getData')
-                console.log(this.open)
+                // console.log(this.open)
         }
     }
 </script>
