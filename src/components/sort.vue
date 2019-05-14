@@ -185,14 +185,14 @@
 			//批量删除事件
 			toggleSelection() {
 				if (this.arr.length == 0) {
-					this.$alert('这是一段内容', '标题名称', {
+					this.$alert( '未选择数据，请重新选择！','错误', {
 						confirmButtonText: '确定',
-						callback: action => {
-							this.$message({
-								type: 'info',
-								message: `action: ${ action }`
-							});
-						},
+						// callback: action => {
+						// 	this.$message({
+						// 		type: 'info',
+						// 		message: `action: ${ action }`
+						// 	});
+						// },
 					})
 				} else {
 					this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
