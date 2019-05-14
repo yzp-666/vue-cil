@@ -8,14 +8,6 @@ import user from '@/components/user.vue'
 import list from '@/components/list.vue'
 
 Vue.use(Router)
-//
-// var go
-// if (window.localStorage.go) {
-//     //匹配成功  go传进 '/index'
-//     go = window.localStorage.go
-// } else {
-//     go = '/index'
-// }
 export default new Router({
     routes: [
         {path: '/', name: 'login', component: login },
@@ -24,7 +16,6 @@ export default new Router({
                 name: 'user',
                 path: '/index/user',
                 component: () => import ('@/components/user'),
-                // component: user
             },
                 {
                     path: '/index/home', name: 'home',component: () => import ('@/components/home'), //component: home

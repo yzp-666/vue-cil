@@ -47,7 +47,6 @@
             delet()
         } else if (admin === 'admin' && password === 'admin') {
             add()
-            // store.state.islogin.loginSuccess=true
 
             localStorage.setItem("islogin", "true");
             setTimeout(()=>{
