@@ -29,9 +29,6 @@ export default new Router({
             },
                 {
                     path: '/index/home', name: 'home',component: () => import ('@/components/home'), //component: home
-                    meta:{
-                        homePages:true
-                    }
                 },
                 {
                     path: '/index/chart', name: 'chart', component: chart
