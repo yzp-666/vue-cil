@@ -12,7 +12,6 @@ export default new Vuex.Store({
   mutations: {
     resp(state, val) {
       state.resp = val
-      console.log(state.resp)
     },
       loginSuccess(state){ //登录成功，改变登录状态为true
           state.islogin = true;
