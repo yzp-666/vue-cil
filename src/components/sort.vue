@@ -1,7 +1,7 @@
 <template>
 	<div style="position: relative;">
 		<div class="head">
-			<span>基本表格</span>
+			<span>排序表格</span>
 			<div>
 				<input type="button" value="刷新" @click="sx" />
 				<input type="button" value="增加数据" @click="push=true" />
@@ -38,21 +38,21 @@
 		 @selection-change="select">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
-			<el-table-column prop="id" label="id" width="60" >
+			<el-table-column prop="id" label="id" width="60" sortable>
 			</el-table-column>
-			<el-table-column fixed prop="name" label="姓名" width="80" >
+			<el-table-column fixed prop="name" label="姓名" width="80" sortable>
 			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="80" >
+			<el-table-column prop="sex" label="性别" width="80" sortable>
 			</el-table-column>
-			<el-table-column prop="old" label="年龄" width="80" >
+			<el-table-column prop="old" label="年龄" width="80" sortable>
 			</el-table-column>
-			<el-table-column prop="date" label="生日" width="120" >
+			<el-table-column prop="date" label="生日" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="email" label="邮箱" width="240" >
+			<el-table-column prop="email" label="邮箱" width="240" sortable>
 			</el-table-column>
-			<el-table-column prop="site" label="地址">
+			<el-table-column prop="site" label="地址" sortable>
 			</el-table-column>
-			<el-table-column fixed="right" label="操作" width="280">
+			<el-table-column fixed="right" label="操作" width="280"sortable>
 				<template slot-scope="scope">
 					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 					<el-button size="mini" type="danger" @click="open(scope.$index)">删除</el-button>
@@ -236,7 +236,7 @@
 <style scoped>
 	.el-table td,
 	.el-table th {
-		padding: 10px 0 !important;
+		padding: 8px 0 !important;
 	}
 </style>
 

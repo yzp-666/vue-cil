@@ -11,7 +11,7 @@
                     <template slot="title"><i class="el-icon-date"></i><span>表格管理</span>
                     </template>
                     <el-menu-item @click="toList" class="menu-list" index="2-1">基本表格</el-menu-item>
-                    <el-menu-item index="2-2">排序表格</el-menu-item>
+                    <el-menu-item index="2-2"  @click="toSort">排序表格</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
                     <template class="sidetitle" slot="title"><i class="el-icon-data-line"></i><span>图表管理</span>
@@ -98,6 +98,9 @@
             },
             toList() {
                 this.$router.push('/index/list')
+            },
+            toSort(){
+                this.$router.push('/index/sort')
             },
             open() {
                 this.$confirm('此操作将注销账户, 是否继续?', '提示', {

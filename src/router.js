@@ -6,6 +6,7 @@ import chart from '@/components/chart.vue'
 import home from '@/components/home.vue'
 import user from '@/components/user.vue'
 import list from '@/components/list.vue'
+import sort from '@/components/sort.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -22,6 +23,9 @@ export default new Router({
                 },
                 {
                     path: '/index/chart', name: 'chart', component: chart
+                },
+                {
+                    path: '/index/sort', name: 'sort', component: sort
                 },
                 {
                     path: '/index/list', name: 'list', component: list
