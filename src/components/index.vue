@@ -55,7 +55,7 @@
             </el-header>
 
             <el-main>
-                <router-view></router-view>
+                <router-view v-if="this.$store.state.resp"></router-view>
             </el-main>
         </el-container>
 
@@ -73,7 +73,7 @@
             }
         },
         created() {
-            document.getElementById("id").focus()
+            this.$store.dispatch('getData')
             if (!window.localStorage.index) {
                 window.localStorage.index = 1
             }
