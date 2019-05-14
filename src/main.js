@@ -15,6 +15,23 @@ Vue.use(ElementUI);
 require('@/mock.js')
 Vue.prototype.$axios=axios
 
+router.beforeEach((to, from, next)=>{
+    let logined = store.state.islogin;
+    if(to.name=="login"){
+        if(!logined){
+            next();
+        }else{
+            router.push('/');
+        }
+    }else{
+        if(!logined){
+            router.push('/');
+        }else{
+            next();
+        }
+    }
+})
+
 new Vue({
     router,
     store,
@@ -44,22 +61,6 @@ console.log(5);
 if(islogin){
     store.commit("loginSuccess")
 }
-router.beforeEach((to, from, next)=>{
-    let logined = store.state.islogin;
-    if(to.name=="login"){
-        if(!logined){
-            next();
-        }else{
-            router.push('/');
-        }
-    }else{
-        if(!logined){
-            router.push('/');
-        }else{
-            next();
-        }
-    }
-})
 
 
 // router.beforeEach((to, from, next) => {

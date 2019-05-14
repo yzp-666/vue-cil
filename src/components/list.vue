@@ -2,7 +2,10 @@
 	<div style="position: relative;">
 		<div class="head">
 			<span>基本表格</span>
-			<input type="button" value="增加数据" @click="push=true"/>
+			<div>
+				<input type="button" value="刷新" @click="sx" />
+				<input type="button" value="增加数据" @click="push=true" />
+			</div>
 		</div>
 		<!-- 增加框 -->
 		<el-dialog title="编辑修改" :visible.sync="push" width="25%">
@@ -35,7 +38,9 @@
 		 @selection-change="select">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
-			<el-table-column fixed prop="name" label="姓名" width="120">
+			<el-table-column prop="id" label="id" width="40">
+			</el-table-column>
+			<el-table-column fixed prop="name" label="姓名" width="80">
 			</el-table-column>
 			<el-table-column prop="sex" label="性别" width="60">
 			</el-table-column>
@@ -43,9 +48,9 @@
 			</el-table-column>
 			<el-table-column prop="date" label="生日" width="120">
 			</el-table-column>
-			<el-table-column prop="email" label="邮箱" width="160">
+			<el-table-column prop="email" label="邮箱" width="260">
 			</el-table-column>
-			<el-table-column prop="site" label="地址" width="380">
+			<el-table-column prop="site" label="地址" width="280">
 			</el-table-column>
 			<el-table-column fixed="right" label="操作" width="280">
 				<template slot-scope="scope">
@@ -100,30 +105,42 @@
 		name: 'list',
 		data() {
 			return {
-				tableData: [{
-						id: '1',
-						date: '2016-05-02',
-						name: '王小虎',
-						sex: '男',
-						old: '24',
-						email: '819836692@qq.com',
-						site: '上海市普陀区金沙江路 1518 弄'
-					},
-				],
+				tableData: [],
+				showButton: false,
 				arr: [],
 				idarr: [],
-				total: 0, //默认数据总数
+				// total: "", //默认数据总数
 				pagesize: 10, //每页的数据条数
 				currentPage: 1, //默认开始页面
-				// show: false,
 				obj: {},
-				nobj: {id:'',name:'',sex:'',old:'',email:'',date:'',site:''},
+				nobj: {
+					id: '',
+					name: '',
+					sex: '',
+					old: '',
+					email: '',
+					date: '',
+					site: ''
+				},
 				index: '',
 				dialogFormVisible: false,
 				push: false,
 			}
 		},
+		computed: {
+			total() {
+				return this.tableData.length
+			}
+		},
 		methods: {
+			get() {
+				this.tableData = this.$store.state.resp
+			},
+			// 刷新事件
+			sx() {
+				this.$store.dispatch('getData')
+				this.get()
+			},
 			// 编辑事件
 			handleEdit(index, row) {
 				// console.log(index, row)
@@ -167,45 +184,58 @@
 			},
 			//批量删除事件
 			toggleSelection() {
-				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-					confirmButtonText: '确定',
-					cancelButtonText: '取消',
-					type: 'warning'
-				}).then(() => {
-					let vthis = this
-					this.arr.map(function(item) {
-						vthis.tableData.map((items, indexs) => {
-							if (item.id == items.id) {
-								vthis.tableData.splice(indexs, 1)
-							}
-						})
+				if (this.arr.length == 0) {
+					this.$alert('这是一段内容', '标题名称', {
+						confirmButtonText: '确定',
+						callback: action => {
+							this.$message({
+								type: 'info',
+								message: `action: ${ action }`
+							});
+						},
 					})
-					this.$message({
-						type: 'success',
-						message: '删除成功!'
+				} else {
+					this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						let vthis = this
+						this.arr.map(function(item) {
+							vthis.tableData.map((items, indexs) => {
+								if (item.id == items.id) {
+									vthis.tableData.splice(indexs, 1)
+								}
+							})
+						})
+						this.$message({
+							type: 'success',
+							message: '删除成功!'
+						});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '已取消删除'
+						});
 					});
-				}).catch(() => {
-					this.$message({
-						type: 'info',
-						message: '已取消删除'
-					});
-				});
+				}
 			},
 			//增加事件
-			nqd( ){
-				this.push=false
-				this.nobj.id = this.tableData.length+1
+			nqd() {
+				this.push = false
+				this.nobj.id = this.tableData.length + 1
 				this.tableData.push(JSON.parse(JSON.stringify(this.nobj)))
 			}
 		},
-		created() {
-			this.total = this.tableData.length
+		mounted() {
+			this.get()
 		}
 	}
 </script>
 
 <style>
-	.el-table td, .el-table th{
+	.el-table td,
+	.el-table th {
 		padding: 10px 0 !important;
 	}
 </style>
@@ -247,22 +277,24 @@
 
 	.head {
 		display: flex;
-		justify-content:space-between;
+		justify-content: space-between;
 		padding: 8px 24px;
 		background: white;
 		border-radius: 3px 3px 0 0;
-		
-		span{
+
+		span {
 			font-weight: bold;
 			color: rgba(105, 105, 105, 1);
 		}
-		
+
 		input {
+			margin: 0 15px;
 			padding: 4px 16px;
 			border-radius: 3px;
 			color: white;
 			background: rgb(30, 144, 255);
-			&:hover{
+
+			&:hover {
 				background: rgba(30, 144, 255, 0.8);
 			}
 		}

@@ -73,20 +73,15 @@
             }
         },
         created() {
-            if(!window.localStorage.index){
-                window.localStorage.index=1
+            if (!window.localStorage.index) {
+                window.localStorage.index = 1
             }
             this.index = window.localStorage.index
             console.log(this.index)
-            if (!window.localStorage.islogin) {
-                console.log(4);
-                this.$router.replace("/")
-            }
         },
         methods: {
             guanbi(index) {
                 window.localStorage.setItem('index', index)
-
             },
             toHome() {
                 this.$router.push('/index/home')
@@ -104,12 +99,15 @@
                 this.$confirm('此操作将注销账户, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
-                    type: 'warning'
+                    type: 'warning',
+                    duration:1500
                 }).then(() => {
                     this.$message({
                         type: 'success',
-                        message: '注销成功!'
+                        message: '注销成功!',
                     });
+                    this.$store.state.islogin = false
+                    window.localStorage.clear()
                     this.$router.push('/login')
                 }).catch(() => {
                     this.$message({

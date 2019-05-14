@@ -25,7 +25,7 @@
             onSubmit() {
                 console.log('submit!');
             }
-        }
+        },
     }
 </script>
 

@@ -35,7 +35,7 @@
     function delet() {
         window.localStorage.clear()
     }
-    function go(admin,password,router,store,route) {
+    function go(admin,password,router,store,route,open) {
         if (!admin && !password) {
             alert("请输入用户名与密码！！！")
             delet()
@@ -59,6 +59,7 @@
                     router.replace("/index")
                 }
             }, 400);
+            open()
 
         } else {
             alert("用户名或密码错误");
@@ -89,13 +90,21 @@
             },
         },
         methods:{
+            open() {
+                this.$message({
+                    message: '登录成功 0.0 ！！',
+                    type: 'success',
+                    duration:1500
+                });
+            },
             KeyUpEnter(){
-                go(this.admin,this.password,this.$router,this.$store,this.$route)
+                console.log(this.open)
+                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
             },
             goin(){
-                go(this.admin,this.password,this.$router,this.$store,this.$route)
+                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
                 console.log(this);
@@ -103,6 +112,7 @@
         },
         created(){
 			this.$store.dispatch('getData')
+                console.log(this.open)
         }
     }
 </script>
