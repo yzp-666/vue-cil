@@ -8,44 +8,39 @@ import user from '@/components/user.vue'
 import list from '@/components/list.vue'
 
 Vue.use(Router)
-
-var go
-if (window.localStorage.go) {
-    //匹配成功  go传进 '/index'
-    go = window.localStorage.go
-    console.log(8);
-} else {
-    go = '/index'
-    console.log(9);
-}
+//
+// var go
+// if (window.localStorage.go) {
+//     //匹配成功  go传进 '/index'
+//     go = window.localStorage.go
+// } else {
+//     go = '/index'
+// }
 export default new Router({
     routes: [
         {path: '/', name: 'login', component: login },
         {
-            path: go, name: 'index', component: index, children: [{
+            path: '/index', name: 'index', component: index, children: [{
                 name: 'user',
-                path: go+'/user',
+                path: '/index/user',
                 component: () => import ('@/components/user'),
-                meta:{
-                    homePages:true
-                }
                 // component: user
             },
                 {
-                    path: go+'/home', name: 'home',component: () => import ('@/components/home'), //component: home
+                    path: '/index/home', name: 'home',component: () => import ('@/components/home'), //component: home
                     meta:{
                         homePages:true
                     }
                 },
                 {
-                    path: go+'/chart', name: 'chart', component: chart
+                    path: '/index/chart', name: 'chart', component: chart
                 },
                 {
-                    path: go+'/list', name: 'list', component: list
+                    path: '/index/list', name: 'list', component: list
                 },
                 {
-                    path: go, // 默认进入路由
-                    redirect: go+'/user' //重定向
+                    path: '/index', // 默认进入路由
+                    redirect: '/index/user' //重定向
                 }]
         },
 

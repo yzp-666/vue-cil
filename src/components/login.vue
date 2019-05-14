@@ -35,7 +35,7 @@
     function delet() {
         window.localStorage.clear()
     }
-    function go(admin,password,router) {
+    function go(admin,password,router,store,route) {
         if (!admin && !password) {
             alert("请输入用户名与密码！！！")
             delet()
@@ -47,8 +47,20 @@
             delet()
         } else if (admin === 'admin' && password === 'admin') {
             add()
-            router.push('/index/user')
-            // this.reload()
+            // store.state.islogin.loginSuccess=true
+
+            localStorage.setItem("islogin", "true");
+            console.log(store.state);
+            setTimeout(()=>{
+                store.commit("loginSuccess");
+                let redirect = route.query.redirect; //获取redirect
+                if(redirect != undefined){
+                    router.replace({name:index})
+                }else{
+                    router.replace("/index")
+                }
+            }, 1000);
+
         } else {
             alert("用户名或密码错误");
             delet()
@@ -79,14 +91,15 @@
         },
         methods:{
             KeyUpEnter(){
-                go(this.admin,this.password,this.$router)
+                go(this.admin,this.password,this.$router,this.$store,this.$route)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
             },
             goin(){
-                go(this.admin,this.password,this.$router)
+                go(this.admin,this.password,this.$router,this.$store,this.$route)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
+                console.log(this);
             }
         },
         created(){

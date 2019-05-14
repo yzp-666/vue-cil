@@ -39,24 +39,27 @@ new Vue({
 // console.log(Mock);
 // console.log(JSON.stringify(data, null, 4))
 
-
-// refresh()
-// window.onresize = function () {
-//   setTimeout(function () {
-//     refresh()
-//   }, 10)
-// }
-//
-// function refresh() {
-//   let deviceWidth = document.documentElement.clientWidth;
-//   if (deviceWidth > 1200) {
-//     document.documentElement.style.fontSize = 1200 / 12 + "px"
-//   } else {
-//     document.documentElement.style.fontSize = deviceWidth / 7.5 + "px"
-//   }
-// }
-
-
+let islogin = localStorage.getItem("islogin"); //获取本地登录状态
+console.log(5);
+if(islogin){
+    store.commit("loginSuccess")
+}
+router.beforeEach((to, from, next)=>{
+    let logined = store.state.islogin;
+    if(to.name=="login"){
+        if(!logined){
+            next();
+        }else{
+            router.push('/');
+        }
+    }else{
+        if(!logined){
+            router.push('/');
+        }else{
+            next();
+        }
+    }
+})
 
 // router.beforeEach((to, from, next) => {
 //     /*判断下一个路由是否需要登录，对其进行验证*/
