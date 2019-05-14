@@ -73,6 +73,7 @@
             }
         },
         created() {
+            document.getElementById("id").focus()
             if (!window.localStorage.index) {
                 window.localStorage.index = 1
             }
