@@ -35,19 +35,18 @@
     function delet() {
         window.localStorage.clear()
     }
-    function go(admin,password,router,store,route,open) {
+    function go(admin,password,router,store,route,open,cuo) {
         if (!admin && !password) {
-            alert("请输入用户名与密码！！！")
+            cuo('请输入用户名和密码！！！')
             delet()
         } else if (!admin){
-            alert("请输入用户名！！！");
+            cuo('请输入用户名！！！')
             delet()
         } else if (!password){
-            alert("输入密码！！！");
+            cuo('请输入密码！！！')
             delet()
         } else if (admin === 'admin' && password === 'admin') {
             add()
-
             localStorage.setItem("islogin", "true");
             setTimeout(()=>{
                 store.commit("loginSuccess");
@@ -61,7 +60,7 @@
             open()
 
         } else {
-            alert("用户名或密码错误");
+            cuo('用户名或密码错误！！！')
             delet()
         }
     }
@@ -93,17 +92,27 @@
                 this.$message({
                     message: '登录成功 0.0 ！！',
                     type: 'success',
-                    duration:1500
+                    duration:1500,
+                    center: true
+                });
+            },
+            cuo(msg) {
+                // this.$message.error(msg)
+                this.$message({
+                    message: msg,
+                    type: 'error',
+                    duration:2000,
+                    center: true
                 });
             },
             KeyUpEnter(){
                 // console.log(this.open)
-                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
+                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open,this.cuo)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
             },
             goin(){
-                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open)
+                go(this.admin,this.password,this.$router,this.$store,this.$route,this.open,this.cuo)
                 tips(this.admin,this.$refs.tips1)
                 tips(this.password,this.$refs.tips2)
                 // console.log(this);
