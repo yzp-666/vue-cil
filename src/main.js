@@ -61,6 +61,7 @@ router.beforeEach((to, from, next)=>{
     }
 })
 
+
 // router.beforeEach((to, from, next) => {
 //     /*判断下一个路由是否需要登录，对其进行验证*/
 //     if ('auth' in to.meta && to.meta.auth === true) {
