@@ -300,3 +300,9 @@
 		}
 	}
 </style>
+<style>
+	.is-leaf>*{
+		height: 30px !important;
+		line-height: 30px !important;
+	}
+</style>
