@@ -50,7 +50,6 @@
             // store.state.islogin.loginSuccess=true
 
             localStorage.setItem("islogin", "true");
-            console.log(store.state);
             setTimeout(()=>{
                 store.commit("loginSuccess");
                 let redirect = route.query.redirect; //获取redirect
@@ -59,7 +58,7 @@
                 }else{
                     router.replace("/index")
                 }
-            }, 1000);
+            }, 400);
 
         } else {
             alert("用户名或密码错误");
