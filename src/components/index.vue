@@ -85,7 +85,7 @@
 
             },
             toHome() {
-                this.$router.push('/index/][-=/6')
+                this.$router.push('/index/home')
             },
             toUser() {
                 this.$router.push('/index/user')
