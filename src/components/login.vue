@@ -157,7 +157,7 @@
     .login {
         width: 26rem;
         height: 29rem;
-        background: rgba(255,255,255,0.65);
+        background: rgba(255,255,255,0.4);
         border-radius: 20px;
         text-align: center;
     }
