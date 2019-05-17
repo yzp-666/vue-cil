@@ -4,23 +4,26 @@
 			<span>基本表格</span>
 			<div>
 				<input type="button" value="刷新" @click="sx" />
-				<input type="button" value="增加数据" @click="push=true" />
+				<input type="button" value="增加数据" @click="newbutton" />
 			</div>
 		</div>
 		<!-- 增加框 -->
 		<el-dialog title="编辑修改" :visible.sync="push" width="25%">
 			<el-form :model="nobj">
 				<el-form-item label="姓名">
-					<el-input v-model="nobj.name" autocomplete="off" ></el-input>
+					<el-input v-model="nobj.name" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="性别">
-					<el-input v-model="nobj.sex" autocomplete="off"></el-input>
+					<el-checkbox-group v-model="nobj.sex" :min="0" :max="1">
+						<el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+					</el-checkbox-group>
 				</el-form-item>
 				<el-form-item label="年龄">
 					<el-input v-model="nobj.old" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="生日">
-					<el-input v-model="nobj.date" autocomplete="off"></el-input>
+					<el-date-picker value-format="yyyy-MM-dd" v-model="nobj.date" type="date" placeholder="选择日期">
+					</el-date-picker>
 				</el-form-item>
 				<el-form-item label="邮箱">
 					<el-input v-model="nobj.email" autocomplete="off"></el-input>
@@ -38,17 +41,17 @@
 		 @selection-change="select">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
-			<el-table-column prop="id" label="id" width="60" >
+			<el-table-column prop="id" label="id" width="60">
 			</el-table-column>
-			<el-table-column fixed prop="name" label="姓名" width="80" >
+			<el-table-column fixed prop="name" label="姓名" width="80">
 			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="80" >
+			<el-table-column prop="sex" label="性别" width="80">
 			</el-table-column>
-			<el-table-column prop="old" label="年龄" width="80" >
+			<el-table-column prop="old" label="年龄" width="80">
 			</el-table-column>
-			<el-table-column prop="date" label="生日" width="120" >
+			<el-table-column prop="date" label="生日" width="120">
 			</el-table-column>
-			<el-table-column prop="email" label="邮箱" width="240" >
+			<el-table-column prop="email" label="邮箱" width="240">
 			</el-table-column>
 			<el-table-column prop="site" label="地址">
 			</el-table-column>
@@ -76,13 +79,16 @@
 					<el-input v-model="obj.name" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="性别">
-					<el-input v-model="obj.sex" autocomplete="off"></el-input>
+					<el-checkbox-group v-model="obj.sex" :min="0" :max="1">
+						<el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+					</el-checkbox-group>
 				</el-form-item>
 				<el-form-item label="年龄">
 					<el-input v-model="obj.old" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="生日">
-					<el-input v-model="obj.date" autocomplete="off"></el-input>
+					<el-date-picker value-format="yyyy-MM-dd" v-model="obj.date" type="date" placeholder="选择日期">
+					</el-date-picker>
 				</el-form-item>
 				<el-form-item label="邮箱">
 					<el-input v-model="obj.email" autocomplete="off"></el-input>
@@ -100,11 +106,14 @@
 </template>
 
 <script>
+	const cityOptions = ['男', '女'];
 	var a = true
 	export default {
 		name: 'list',
 		data() {
 			return {
+				// checkedCities: [],
+				cities: cityOptions,
 				tableData: [],
 				showButton: false,
 				arr: [],
@@ -116,7 +125,7 @@
 				nobj: {
 					id: '',
 					name: '',
-					sex: '',
+					sex: [],
 					old: '',
 					email: '',
 					date: '',
@@ -145,6 +154,8 @@
 			handleEdit(index, row) {
 				// console.log(index, row)
 				this.dialogFormVisible = true
+				// row.date = row.date
+				console.log(row.date)
 				this.obj = JSON.parse(JSON.stringify(row))
 				this.index = index
 			},
@@ -185,14 +196,14 @@
 			//批量删除事件
 			toggleSelection() {
 				if (this.arr.length == 0) {
-					this.$alert( '未选择数据，请重新选择！', '错误',{
+					this.$alert('请重新选择您要删除的数据', '您没有选择', {
 						confirmButtonText: '确定',
-						// callback: action => {
-						// 	this.$message({
-						// 		type: 'info',
-						// 		message: `action: ${ action }`
-						// 	});
-						// },
+						callback: action => {
+							this.$message({
+								type: 'info',
+								message: `操作无效: 未选择数据`
+							});
+						},
 					})
 				} else {
 					this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -218,6 +229,19 @@
 							message: '已取消删除'
 						});
 					});
+				}
+			},
+			//增加按钮事件
+			newbutton() {
+				this.push = true
+				this.nobj = {
+					id: '',
+					name: '',
+					sex: [],
+					old: '',
+					email: '',
+					date: '',
+					site: ''
 				}
 			},
 			//增加事件
@@ -301,7 +325,7 @@
 	}
 </style>
 <style>
-	.is-leaf>*{
+	.is-leaf>* {
 		height: 30px !important;
 		line-height: 30px !important;
 	}

@@ -81,7 +81,6 @@
                 window.localStorage.index = 1
             }
             this.index = window.localStorage.index
-            console.log(this.index)
         },
         methods: {
             guanbi(index) {

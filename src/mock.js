@@ -9,7 +9,7 @@ for(let i = 0; i < 20; i ++) {
   	'id': i+1,
   	'date': Random.date(),
   	'name': Random.cname(),
-	'sex': Random.cword('男女'),
+	'sex': [Random.cword('男女')],
   	'old': Random.integer(20, 50),
   	'email': Random.email(),
   	'site': Random.county(true)
